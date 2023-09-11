@@ -1,10 +1,11 @@
 package com.devsuperior.aula.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +23,9 @@ public class CategoryService {
 	private CategoryRepository repository;
 	
 	@Transactional(readOnly = true)
-	public List<CategoryDTO> findAll(){
-		List<Category> result = repository.findAll();
-		return result.stream().map(x -> new CategoryDTO(x)).toList();
+	public Page<CategoryDTO> findAll(Pageable pageable){
+		Page<Category> result = repository.findAll(pageable);
+		return result.map(x -> new CategoryDTO(x));
 	}
 	
 	@Transactional(readOnly = true)
@@ -44,10 +45,14 @@ public class CategoryService {
 	
 	@Transactional
 	public CategoryDTO update (Long id, CategoryDTO dto) {
+		try {
 		Category category = repository.getReferenceById(id);
 		category.setName(dto.getName());
 		category = repository.save(category);
 		return new CategoryDTO(category);
+		}catch(ResourceNotFoundException e) {
+			throw new ResourceNotFoundException(e.getMessage());
+		}
 	}
 	
 	@Transactional(propagation = Propagation.SUPPORTS)
