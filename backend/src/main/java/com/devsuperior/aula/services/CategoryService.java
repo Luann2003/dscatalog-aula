@@ -51,7 +51,7 @@ public class CategoryService {
 		category = repository.save(category);
 		return new CategoryDTO(category);
 		}catch(ResourceNotFoundException e) {
-			throw new ResourceNotFoundException(e.getMessage());
+			throw new ResourceNotFoundException("Recurso não encontrado");
 		}
 	}
 	
