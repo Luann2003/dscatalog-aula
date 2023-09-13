@@ -30,7 +30,7 @@ public class CategoryResource {
 	public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable){
 		Page<CategoryDTO> list = service.findAll(pageable);
 		return ResponseEntity.ok().body(list);
-	}
+	 }
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){
