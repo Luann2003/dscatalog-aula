@@ -58,6 +58,7 @@ public class ProductRepositoryTests {
 		Optional<Product> result = repository.findById(existingId);
 		Assertions.assertTrue(result.isPresent());
 	}
+	
 	@Test
 	public void returnShouldIdWhenNoExistingId() {
 		noExistingId = 1000L;
@@ -65,6 +66,4 @@ public class ProductRepositoryTests {
 		Optional<Product> result = repository.findById(noExistingId);
 		Assertions.assertTrue(result.isEmpty());
 	}
-	
-	
 }
