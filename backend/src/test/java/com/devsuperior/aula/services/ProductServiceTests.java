@@ -54,7 +54,6 @@ public class ProductServiceTests {
 	private Product product;
 	private Category category;
 
-	
 	@BeforeEach
 	 void setUp() throws Exception {
 		existingId = 1L;
@@ -88,7 +87,7 @@ public class ProductServiceTests {
 	}
 	
 	@Test
-	public void UpdateshouldResourceNotFoundExceptionWhenIdNoExisting() {
+	public void updateshouldResourceNotFoundExceptionWhenIdNoExisting() {
 		
 		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
 
@@ -103,14 +102,11 @@ public class ProductServiceTests {
 	@Test
 	public void updateShouldProductDtoWhenIdExisting() {
 		
-		ProductDTO dto = Factory.createProductDTO();
-		
+		ProductDTO dto = Factory.createProductDTO();	
 		service.update(existingId, dto);
 		
 		Assertions.assertNotNull(dto);
-		
 	}
-	
 	
 	@Test
 	public void findByIdshouldResourceNotFoundExceptionWhenIdNoExisting() {
@@ -120,7 +116,6 @@ public class ProductServiceTests {
 			Assertions.assertNotNull(dto);
 		});
 	}
-	
 	
 	@Test
 	public void findByIdshouldProductDtoWhenIdExisting() {
